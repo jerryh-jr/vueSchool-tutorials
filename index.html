@@ -13,16 +13,21 @@
                 <button v-else @click="doEdit(true)" class="btn btn-primary">Add Item</button>
             </div> 
             <div v-if="editing" class="add-item-form">
-                <input 
+                <input
                     @keyup.enter="saveItem" 
-                    v-model="newItem" type="text" placeholder="Add an Item">
+                    v-model="newItem" type="text" placeholder="Add an Item"
+                >
                 <label>
                     <input type="checkbox" v-model="newItemHighPriority">
                     High Priority
                 </label>
                 <button 
-                    @click="items.push({id:items.length + 1, label: newItem })" 
-                    class="btn btn-primary">Save Item</button>
+                    v-bind:disabled="newItem.length === 0"
+                    @click="saveItem" 
+                    class="btn btn-primary"
+                    >
+                    Save Item
+                </button>
             </div>
             <p v-if="items.length === 0">Nice Job! You've bought all your items!</p>
             <ul>
